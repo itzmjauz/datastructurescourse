@@ -1,4 +1,4 @@
-import java.util.Arrays; //temporary
+package prac1;
 
 class HeapSorter {
 
