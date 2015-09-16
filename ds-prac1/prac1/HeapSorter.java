@@ -62,7 +62,7 @@ class HeapSorter {
     * to the parent, and if needed , swapped.
     **/
   private static int[] maxHeapify(int[] toHeapify, int mod) {
-    int iterations = ((toHeapify.length + 1) / mod);
+    int iterations = toHeapify.length / mod;
 
     for(int x = iterations ; x >= 0 ; x--) {
       for(int offset = 1 ; offset <= mod ; offset++) {
