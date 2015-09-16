@@ -10,7 +10,7 @@ class Heap {
   */
   public static int parent(int index) {
     int x = index - 1;
-    return (int) x / 2;
+    return x / 2;
   }
 
   /*
