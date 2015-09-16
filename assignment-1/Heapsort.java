@@ -5,12 +5,12 @@ class Heap {
   //General
 
   public static int parent(int index) {
-    int x = index-1;
-    return (int) x/2;
+    int x = index - 1;
+    return (int) x / 2;
   }
 
   public static int leftChild(int index) {
-    int left = index*2;
+    int left = index * 2;
     return left;
   }
 
@@ -23,20 +23,20 @@ class Heap {
   }
 
   public static int[] append(int[] input, int item) {
-    int index = input.length+1;
+    int index = input.length + 1;
     int[] list = new int[index];
 
-    for (int i = 0; i < index-1; i++) {
+    for (int i = 0 ; i < index - 1 ; i++) {
       list[i] = input[i];
     }
-    list[index-1] = item;
+    list[index- 1 ] = item;
     return list;
   }
 
   public static int[] pop(int[] input) {
-    int index = input.length-1;
+    int index = input.length - 1;
     int[] list = new int[index];
-    for (int i = 0; i < index; i++) {
+    for (int i = 0 ; i < index ; i++) {
       list[i] = input[i];
     }
     return list;
@@ -46,7 +46,7 @@ class Heap {
 
   public static int[] addItem(int[] input, int item) {
     int[] list = append(input, item);
-    int index = list.length-1;
+    int index = list.length - 1;
 
     return recurseAdd(list, index);
   }
@@ -58,7 +58,7 @@ class Heap {
     else {
       int x = parent(index);
 
-      if (list[x]>list[index]) {
+      if (list[x] > list[index]) {
         list = swap(x, index, list);
         return recurseAdd(list, x);
       }
@@ -71,7 +71,7 @@ class Heap {
   //Removal
 
   public static int[] removeItem(int[] input, int index) {
-    input[0] = input[input.length-1];
+    input[0] = input[input.length - 1];
     input = pop(input);
 
     return recurseSift(input, index);
@@ -79,16 +79,16 @@ class Heap {
 
   public static int[] recurseSift(int[] list, int index) {
     int left = leftChild(index);
-    int right = left+1;
-    if (left>=list.length && right>=list.length) {
+    int right = left + 1;
+    if (left >= list.length && right >= list.length) {
       //System.out.println(Arrays.toString(list));
       return list;
     }
-    if (list[left-1]<list[right-1]) {
-      list = swap(left-1, index-1, list);
+    if (list[left - 1] < list[right - 1]) {
+      list = swap(left - 1, index - 1, list);
       return recurseSift(list, left);
     } else {
-      list = swap(right-1, index-1, list);
+      list = swap(right - 1, index - 1, list);
       return recurseSift(list, right);
     }
   }
@@ -97,7 +97,7 @@ class Heap {
 
   public static int[] heapsort(int[] in) {
     int[] input = {in[0]};
-    for (int i = 1; i < in.length; i++) {
+    for (int i = 1 ; i < in.length ; i++) {
       //System.out.println(in[i]);
 
       input = addItem(input, in[i]);
@@ -105,7 +105,7 @@ class Heap {
 
     int[] sort = {input[0]};
 
-    while (input.length!=1) {
+    while (input.length != 1) {
       input = removeItem(input, 1);
       sort = append(sort, input[0]);
     }
