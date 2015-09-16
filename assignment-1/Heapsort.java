@@ -4,17 +4,17 @@ class Heap {
 
   //General
 
-  public static int parent(int index){
+  public static int parent(int index) {
     int x = index-1;
     return (int) x/2;
   }
 
-  public static int leftChild(int index){
+  public static int leftChild(int index) {
     int left = index*2;
     return left;
   }
 
-  public static int[] swap(int a, int b, int[] list){
+  public static int[] swap(int a, int b, int[] list) {
     int x = list[a];
     int y = list[b];
     list[b] = x;
@@ -22,7 +22,7 @@ class Heap {
     return list;
   }
 
-  public static int[] append(int[] input, int item){
+  public static int[] append(int[] input, int item) {
     int index = input.length+1;
     int[] list = new int[index];
 
@@ -33,7 +33,7 @@ class Heap {
     return list;
   }
 
-  public static int[] pop(int[] input){
+  public static int[] pop(int[] input) {
     int index = input.length-1;
     int[] list = new int[index];
     for (int i = 0; i < index; i++) {
@@ -44,14 +44,14 @@ class Heap {
 
   //Additions
 
-  public static int[] addItem(int[] input, int item){
+  public static int[] addItem(int[] input, int item) {
     int[] list = append(input, item);
     int index = list.length-1;
 
     return recurseAdd(list, index);
   }
 
-  public static int[] recurseAdd(int[] list, int index){
+  public static int[] recurseAdd(int[] list, int index) {
     if (index == 0) {
       return list;
     }
@@ -70,10 +70,10 @@ class Heap {
 
   //Removal
 
-  public static int[] removeItem(int[] input, int index){
+  public static int[] removeItem(int[] input, int index) {
     input[0] = input[input.length-1];
     input = pop(input);
-    
+
     return recurseSift(input, index);
   }
 
@@ -95,7 +95,7 @@ class Heap {
 
   //Sorting
 
-  public static int[] heapsort(int[] in){
+  public static int[] heapsort(int[] in) {
     int[] input = {in[0]};
     for (int i = 1; i < in.length; i++) {
       //System.out.println(in[i]);
