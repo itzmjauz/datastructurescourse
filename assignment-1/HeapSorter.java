@@ -7,14 +7,10 @@ class HeapSorter {
   public int[] start(int[] toSort, boolean binaryHeap) {
     int[] sorted = new int[toSort.length];
     int sortedIndex = toSort.length - 1;
+    int mod = binaryHeap? 2 : 3; // binary or ternary ,, mod 2 | 3
 
     while(sortedIndex >= 0) {
-      if(binaryHeap) {
-        toSort = binaryMaxHeapify(toSort);
-      } else {
-        toSort = ternaryMaxHeapify(toSort);
-      }
-
+      toSort = maxHeapify(toSort, mod);
       sorted[sortedIndex] = toSort[0];
       sortedIndex--;
       toSort = removeRoot(toSort);
@@ -32,7 +28,7 @@ class HeapSorter {
 
     return result;
   }
-  
+
   // edits array ~ swaps the two given indexes
   private void swap(int[] array, int index1, int index2) {
     int x = array[index1];
@@ -41,30 +37,12 @@ class HeapSorter {
   }
 
   // maxheapifies the given array using swap() (binary)
-  private int[] binaryMaxHeapify(int[] toHeapify) {
-    int iterations = (toHeapify.length / 2);
+  private int[] maxHeapify(int[] toHeapify, int mod) {
+    int iterations = ((toHeapify.length + 1) / mod);
 
     for(int x = iterations ; x >= 0 ; x--) {
-      for(int offset = 1 ; offset <= 2 ; offset++) {
-        int index = (x * 2) + offset;
-
-        if(index < toHeapify.length) {
-          if(toHeapify[index] > toHeapify[x]) {
-            swap(toHeapify, x, index);
-          }
-        }
-      }
-    }
-    return toHeapify;
-  }
-
-  // maxheapifies the given array using swap() (ternary)
-  private int[] ternaryMaxHeapify(int[] toHeapify) {
-    int iterations = ((toHeapify.length + 1) / 3);
-
-    for(int x = iterations ; x >= 0 ; x--) {
-      for(int offset = 1 ; offset <= 3 ; offset++) {
-        int index = (x * 3) + offset;
+      for(int offset = 1 ; offset <= mod ; offset++) {
+        int index = (x * mod) + offset;
 
         if(index < toHeapify.length) {
           if(toHeapify[index] > toHeapify[x]) {
