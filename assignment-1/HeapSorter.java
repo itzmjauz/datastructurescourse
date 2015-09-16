@@ -5,7 +5,9 @@ class HeapSorter {
   //start method called from Main, checks if we should handle the
   //toSorted array as binary or ternary
   public int[] start(int[] toSort, boolean binaryHeap) {
-      if(binaryHeap) {
+    int[] sorted = new int[toSort.length];
+
+    if(binaryHeap) {
       return binaryHeapSort(toSort);
     } else {
       //return ternaryHeapSort(toSort);
@@ -13,17 +15,30 @@ class HeapSorter {
     }
   }
 
+  private int[] shift(int[] toShift) {
+    int temp = toShift[toShift.length - 1];
+
+    for(int i = (toShift.length - 1) ; i > 0 ; i--) {
+      toShift[i] = toShift[i - 1];
+    }
+
+    toShift[0] = temp;
+    return toShift;
+  }
+
   private int[] binaryHeapSort(int[] toSort) {
     System.out.println(toSort.toString());
     return toSort;
   }
 
+  // edits array ~ swaps the two given indexes
   private void swap(int[] array, int index1, int index2) {
     int x = array[index1];
     array[index1] = array[index2];
     array[index2] = x;
   }
 
+  // maxheapifies the given array using swap() (binary)
   private int[] binaryMaxHeapify(int[] toHeapify) {
     int iterations = (toHeapify.length / 2);
 
@@ -41,6 +56,7 @@ class HeapSorter {
     return toHeapify;
   }
 
+  // maxheapifies the given array using swap() (ternary)
   private int[] ternaryMaxHeapify(int[] toHeapify) {
     int iterations = ((toHeapify.length + 1) / 3);
 
