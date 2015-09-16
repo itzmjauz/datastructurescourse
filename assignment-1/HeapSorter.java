@@ -6,13 +6,17 @@ class HeapSorter {
   //toSorted array as binary or ternary
   public int[] start(int[] toSort, boolean binaryHeap) {
     int[] sorted = new int[toSort.length];
+    return toSort;
+  }
 
-    if(binaryHeap) {
-      return binaryHeapSort(toSort);
-    } else {
-      //return ternaryHeapSort(toSort);
-      return toSort;
+  private int[] removeRoot(int[] toRemoveFrom) {
+    int[] result = new int[toRemoveFrom.length - 1];
+
+    for(int x = 0 ; x < result.length ; x++) {
+      result[x] = toRemoveFrom[x + 1];
     }
+
+    return result;
   }
 
   private int[] shift(int[] toShift) {
@@ -79,7 +83,7 @@ class HeapSorter {
     int[] input = {8, 7, 10, 2, 9, 3, 4, 6, 5, 1};
     int[] result = binaryMaxHeapify(input);
 
-    System.out.println(Arrays.toString(result));
+    System.out.println(Arrays.toString(removeRoot(result)));
   }
 
   public static void main(String[] args) {
