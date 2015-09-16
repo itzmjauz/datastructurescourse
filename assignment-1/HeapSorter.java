@@ -53,16 +53,4 @@ class HeapSorter {
     }
     return toHeapify;
   }
-
-// temporary testing code
-  public void test() {
-    int[] input = {8, 7, 10, 2, 9, 3, 4, 6, 5, 1};
-    int[] result = start(input, false);
-
-    System.out.println(Arrays.toString(result));
-  }
-
-  public static void main(String[] args) {
-    new HeapSorter().test();
-  }
 }
