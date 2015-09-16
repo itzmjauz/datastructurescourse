@@ -32,18 +32,7 @@ class HeapSorter {
 
     return result;
   }
-
-  private int[] shift(int[] toShift) {
-    int temp = toShift[toShift.length - 1];
-
-    for(int i = (toShift.length - 1) ; i > 0 ; i--) {
-      toShift[i] = toShift[i - 1];
-    }
-
-    toShift[0] = temp;
-    return toShift;
-  }
-
+  
   // edits array ~ swaps the two given indexes
   private void swap(int[] array, int index1, int index2) {
     int x = array[index1];
