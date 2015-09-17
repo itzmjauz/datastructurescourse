@@ -2,7 +2,10 @@ package prac1;
 
 class HeapSorter {
 
-  /** @details 
+  /** @students info 
+    * @names            : Antoni stevenet , David Gall
+    * @vuIDs            : ast257          , dgl800
+    * @details 
     * start method called from Main, checks if we should handle the
     * toSorted array as binary or ternary
     * mod is the modifier that maxheapify needs in order to know how to maxheap the array
