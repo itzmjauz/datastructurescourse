@@ -35,6 +35,12 @@ class HeapSorter {
     * O(3 * N² + N²) 
     *  results in
     * O(N²) 
+    * 
+    * Comment on Ternary vs Binary HeapSort:
+    * 
+    * Since the complexity is independent of mode, however the implimentation is far more complex, 
+    * Ternary HeapSort can be more efficient in very specific use cases, however for a general 
+    * sorting use Binary is more useful. 
     **/
 
   static int[] start(int[] toSort, boolean binaryHeap) {
