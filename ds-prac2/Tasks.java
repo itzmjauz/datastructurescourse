@@ -74,23 +74,33 @@ public class Tasks {
     int size = m.length;
 
     for(int i = 0 ; i < size ; i++) {
-      for(int j = 0 ; j < size ; j++) {
-        if(j < size - 1) {
-          h = max(h, m[i][j] + m[i][j+1]);
-        }
-        if(i < size - 1) {
-          v = max(v, m[i][j] + m[i+1][j]);
-        }
+      h = max(h, getMaxAdjSum(m[i]));
+    }
 
-        if(i < size - 1 && j < size - 1){
-          d = max(d, m[i][j] + m[i+1][j+1]);
-        }
+    for(int j = 0 ; j < size ; j++) {
+      int[] vlist = new int[size];
 
-        if(j < size - 1  && i > 0) {
-          c = max(c, m[i][j] + m[i-1][j+1]);
+      for(int i = 0 ; i < size ; i++) {
+        vlist[i] = m[i][j];
+      }
+      v = max(v, getMaxAdjSum(vlist));
+    }
+
+    int[] dlist;
+    for(int k = 0 ; k < size * 2 ; k++) {
+      if(k > size) {
+        dlist = new int[size - (k - size)];
+      } else {
+        dlist = new int[k];
+      }
+      for(int j = 0 ; j <= k ; j++) {
+        int i = k - j;
+        if( i < size && j < size) {
+          dlist[j] = m[i][j];
         }
       }
     }
+      
     return h + v + d + c;
   }
 
