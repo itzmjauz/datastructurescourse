@@ -73,12 +73,9 @@ public class Tasks {
 
     int size = m.length;
 
-    for(int i = 0 ; i < size ; i++) {
-      h = max(h, kadane(m[i]));
-    }
-
     for(int j = 0 ; j < size ; j++) {
       int[] vlist = new int[size];
+      h = max(h, kadane(m[j]));
 
       for(int i = 0 ; i < size ; i++) {
         vlist[i] = m[i][j];
@@ -87,23 +84,16 @@ public class Tasks {
     }
 
     //diagonals here
-    int[] dlist;
+    int[] dlist, adlist;
     for(int slice = 0 ; slice < 2 * size - 1 ; slice++) {
       int z = (slice < size)? 0 : slice - size + 1;
       dlist = new int[slice - z + 1];
+      adlist = new int[slice - z + 1];
       for(int j = z ; j <= slice - z ; j++) {
+        adlist[j] = m[j][size - 1 - (slice - j)];
         dlist[j] = m[j][slice - j];
       }
       d = max(d, kadane(dlist));
-    }
-    
-    int[] adlist;
-    for(int slice = 0 ; slice < 2 * size - 1 ; slice++) {
-      int z = (slice < size)? 0 : slice - size + 1;
-      adlist = new int[slice - z + 1];
-      for(int j = z ; j <= slice - z ; j++) {
-          adlist[j] = m[j][size - 1 - (slice - j)];
-      }
       c = max(c, kadane(adlist));
     }
     return h + v + d + c;
