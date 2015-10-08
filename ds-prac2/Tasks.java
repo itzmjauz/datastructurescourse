@@ -94,4 +94,41 @@ public class Tasks {
     return h + v + d + c;
   }
 
+  public static int[] reduce(int[] p) {
+    int size = 0;
+    int sum = 0;
+    boolean positive = true;
+
+    for(int i = 0 ; i < p.length ; i++) {
+      if(i == 0 ) {
+        size = 1;
+        if(p[i] > 0) {
+          positive = true;
+        } else positive = false;
+      }
+
+      if(p[i] > 0 != positive) {
+        size += 1;
+        positive = !positive;
+      }
+    }
+
+    int[] result = new int[size];
+    sum = 0;
+    int index = 0;
+
+    for(int i = 0 ; i < p.length ; i++) {
+      if(p[i] > 0 == positive) {
+        sum += p[i];
+        result[index] = sum;
+      } else {
+        index++;
+        positive = !positive;
+        sum = p[i];
+      }
+    }
+
+    result[index] = sum;
+    return result;
+  }
 }
