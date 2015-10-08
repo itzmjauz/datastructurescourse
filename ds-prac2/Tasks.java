@@ -86,25 +86,15 @@ public class Tasks {
       v = max(v, getMaxAdjSum(vlist));
     }
 
-    int[] dlist;
-    for(int k = 0 ; k < size * 2 ; k++) {
-      if(k > size) {
-        dlist = new int[size - (k - size)];
-      } else {
-        dlist = new int[k];
-      }
-      for(int j = 0 ; j <= k ; j++) {
-        int i = k - j;
-        if( i < size && j < size) {
-          dlist[j] = m[i][j];
-        }
-      }
-    }
-      
+    //diagonals here
+    //
     return h + v + d + c;
   }
 
-  public static int[] reduce(int[] p) {
+  private static int getMaxAdjSum(int[] a) {
+    return 0;
+  }
+  private static int[] reduce(int[] p) {
     int size = 0;
     int sum = 0;
     boolean positive = true;
