@@ -71,12 +71,27 @@ public class Tasks {
     int d = Integer.MIN_VALUE;
     int c = Integer.MIN_VALUE;
 
-    for(int i = 0 ; i < (m.length - 1) ; i++) {
-      for(int j = 0 ; j < (m.length - 1); j++) {
-        h = max(h, m[i][j] + m[i][j+1]);
+    int size = m.length;
+
+    for(int i = 0 ; i < size ; i++) {
+      for(int j = 0 ; j < size ; j++) {
+        if(j < size - 1) {
+          h = max(h, m[i][j] + m[i][j+1]);
+        }
+        if(i < size - 1) {
+          v = max(v, m[i][j] + m[i+1][j]);
+        }
+
+        if(i < size - 1 && j < size - 1){
+          d = max(d, m[i][j] + m[i+1][j+1]);
+        }
+
+        if(j < size - 1  && i > 0) {
+          c = max(c, m[i][j] + m[i-1][j+1]);
+        }
       }
     }
-    return 0;
+    return h + v + d + c;
   }
 
 }
