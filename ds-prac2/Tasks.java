@@ -74,7 +74,7 @@ public class Tasks {
     int size = m.length;
 
     for(int i = 0 ; i < size ; i++) {
-      h = max(h, getMaxAdjSum(m[i]));
+      h = max(h, kadane(m[i]));
     }
 
     for(int j = 0 ; j < size ; j++) {
@@ -83,52 +83,56 @@ public class Tasks {
       for(int i = 0 ; i < size ; i++) {
         vlist[i] = m[i][j];
       }
-      v = max(v, getMaxAdjSum(vlist));
+      v = max(v, kadane(vlist));
     }
 
     //diagonals here
-    //
+    int[] dlist;
+    for(int slice = 0 ; slice < 2 * size - 1 ; slice++) {
+      int z = (slice < size)? 0 : slice - size + 1;
+      dlist = new int[slice - z + 1];
+      for(int j = z ; j <= slice - z ; j++) {
+        dlist[j] = m[j][slice - j];
+      }
+      d = max(d, kadane(dlist));
+    }
+    
+    int[] adlist;
+    for(int slice = 0 ; slice < 2 * size - 1 ; slice++) {
+      int z = (slice < size)? 0 : slice - size + 1;
+      adlist = new int[slice - z + 1];
+      for(int j = z ; j <= slice - z ; j++) {
+          adlist[j] = m[j][size - 1 - (slice - j)];
+      }
+      c = max(c, kadane(adlist));
+    }
     return h + v + d + c;
   }
 
   private static int getMaxAdjSum(int[] a) {
     return 0;
   }
-  private static int[] reduce(int[] p) {
-    int size = 0;
-    int sum = 0;
-    boolean positive = true;
 
-    for(int i = 0 ; i < p.length ; i++) {
-      if(i == 0 ) {
-        size = 1;
-        if(p[i] > 0) {
-          positive = true;
-        } else positive = false;
-      }
+	public static int kadane(int[] a) {
+		//apply kadane's algorithm
+		int max_so_far = 0;
+		int max_ending_here = 0;
 
-      if(p[i] > 0 != positive) {
-        size += 1;
-        positive = !positive;
-      }
-    }
 
-    int[] result = new int[size];
-    sum = 0;
-    int index = 0;
+		for(int i = 0 ; i < a.length ; i++ ) {
+			max_ending_here = max_ending_here + a[i];
 
-    for(int i = 0 ; i < p.length ; i++) {
-      if(p[i] > 0 == positive) {
-        sum += p[i];
-        result[index] = sum;
-      } else {
-        index++;
-        positive = !positive;
-        sum = p[i];
-      }
-    }
+			if(max_ending_here < 0) {
+				max_ending_here = 0;
+			}
 
-    result[index] = sum;
-    return result;
-  }
+			if(max_so_far < max_ending_here) {
+				max_so_far = max_ending_here;
+			}
+		}
+
+		return max_so_far;
+	}
 }
+
+
